@@ -11,11 +11,23 @@ const getUserById = id => {
   return knex('users').where('id', id)
 }
 const deleteUser = id => {
-    return knex('users')
-      .where('id', id)
-      .del()
-      .then(data=>data)
-  }
+  return knex('users')
+    .where('id', id)
+    .del()
+    .then(data => data)
+}
+const patchUser = (userId, user) => {
+  console.log('userid: ', userId, 'user: ', user)
+  return knex('users')
+    .where('id', userId)
+    .update(user)
+    .then(data => data)
+}
+const getAllUsersAndItems = () => {
+return knex('items')
+.join('users', 'user_id', '=', 'users.id')
+
+}
 
 const postUser = (tempUser, passHash) => {
   const newUser = {
@@ -48,22 +60,25 @@ const deleteItem = id => {
   return knex('items')
     .where('id', id)
     .del()
-    .then(data=>data)
+    .then(data => data)
 }
 const patchItem = (itemId, item) => {
-    return knex('items').where('id',itemId).update(item).then(data=>data);
-  }
+  return knex('items')
+    .where('id', itemId)
+    .update(item)
+    .then(data => data)
+}
 //   const putItem = (itemId, item) => {
 //     console.log('this is item: ', item)
 //     return knex('items').where('id',itemId).update({
-//             // user_id: item.user_id || null, 
-//             // item_name: item.item_name || null, 
-//             // description: item.description || null, 
+//             // user_id: item.user_id || null,
+//             // item_name: item.item_name || null,
+//             // description: item.description || null,
 //             // quantity: item.quantity ||null,
 
-//             user_id: item.user_id, 
-//             item_name: item.item_name, 
-//             description: item.description, 
+//             user_id: item.user_id,
+//             item_name: item.item_name,
+//             description: item.description,
 //             quantity: item.quantity,
 //     }).returning('*').then(data=>data);
 //   }
@@ -79,5 +94,7 @@ module.exports = {
   deleteItem,
   deleteUser,
   patchItem,
-//   putItem,
+  patchUser,
+  getAllUsersAndItems
+  //   putItem,
 }

@@ -14,7 +14,9 @@ const {
   deleteItem,
   deleteUser,
   patchItem,
-//   putItem,
+  patchUser,
+  getAllUsersAndItems
+  //   putItem,
 } = require('./controllers')
 
 app.use(morgan('tiny'))
@@ -42,21 +44,27 @@ app.get('/user/:id', (req, res) => {
     .catch(err => res.status(500).send(err))
 })
 app.delete('/user/:id', (req, res) => {
-    let id = req.params.id
-    deleteUser(id)
-      .then(data => res.status(200).json(data))
-      // .then(data => res.sendStatus(200))
-      .catch(err => res.status(500).send(err))
-  })
-
+  let id = req.params.id
+  deleteUser(id)
+    .then(data => res.status(200).json(data))
+    // .then(data => res.sendStatus(200))
+    .catch(err => res.status(500).send(err))
+})
+app.patch('/user/:id', (req, res) => {
+  let userId = req.params.id
+  let user = req.body
+  patchUser(userId, user)
+    .then(data => res.status(200).json(data))
+    .catch(err => res.status(500).json(err))
+})
 
 app.post('/user', (req, res) => {
   const tempUser = req.body
 
   hash(tempUser.password, salt)
     .then(passHash => {
-    //   console.log('given password for test purposes: ', tempUser.password)
-    //   console.log('passHash for test purposes: ', passHash)
+      //   console.log('given password for test purposes: ', tempUser.password)
+      //   console.log('passHash for test purposes: ', passHash)
       postUser(tempUser, passHash)
         .then(data => res.status(200).send(data))
         .catch(err => res.status(500).send(err))
@@ -78,13 +86,11 @@ app.post('/signin', (req, res) => {
     .catch(err => res.status(400).send('username is incorrect'))
 })
 
-app.get('/test/:user', (req, res) => {
-  // console.log(req.params.user)
-  let username = req.params.user
-  getPassHash(username)
-    .then(data => res.status(200).send(data))
-    .catch(err => res.status(500).send(err))
-})
+app.get('/useritem', (req, res) => {
+    getAllUsersAndItems()
+      .then(data => res.status(200).send(data))
+      .catch(err => res.status(500).send(err))
+  })
 
 //ITEMS
 app.get('/item', (req, res) => {
@@ -111,12 +117,12 @@ app.delete('/item/:id', (req, res) => {
     .catch(err => res.status(500).send(err))
 })
 app.patch('/item/:id', (req, res) => {
-    let itemId = req.params.id
-    let item = req.body;
-    patchItem(itemId, item)
+  let itemId = req.params.id
+  let item = req.body
+  patchItem(itemId, item)
     .then(data => res.status(200).json(data))
     .catch(err => res.status(500).send(err))
-  })
+})
 //   app.put('/item/:id', (req, res) => {
 //     let itemId = req.params.id
 //     let item = req.body;
