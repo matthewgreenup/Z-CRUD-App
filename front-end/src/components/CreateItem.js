@@ -13,7 +13,7 @@ export const CreateItem = () => {
 
 ) : (
     <div className="">
-    <h1 className="text-center py-10 text-3xl">You need to be signed in to see this page</h1>
+    <h1 className="text-center font-bold py-10 text-3xl">You need to be signed in to see this page</h1>
 </div>
 )}
   </>

@@ -16,7 +16,7 @@ export const MyItems = () => {
 
 ) : (
   <div className="">
-    <h1 className="text-center py-10 text-3xl">You need to be signed in to see this page</h1>
+    <h1 className="text-center py-10 font-bold text-3xl">You need to be signed in to see this page</h1>
 </div>
 )}
   </>

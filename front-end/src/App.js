@@ -18,11 +18,12 @@ function App () {
   const [allItemsArray, setAllItemsArray] = useState(false)
   const [currUser, setCurrUser] = useState({})
   const [dataChange, setDataChange] = useState(false)
+  const [currItem, setCurrItem] = useState({})
 
-  const passContext = { signedIn, setSignedIn, api, allItemsArray, setAllItemsArray, currUser, setCurrUser,dataChange, setDataChange }
+  const passContext = { signedIn, setSignedIn, api, allItemsArray, setAllItemsArray, currUser, setCurrUser,dataChange, setDataChange, currItem, setCurrItem }
 
   useEffect(() => {
-    const url = `${api}/item`
+    const url = `${api}/useritem`
     fetch(url)
       .then(res => res.json())
       .then(data => {

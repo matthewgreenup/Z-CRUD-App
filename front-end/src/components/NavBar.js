@@ -14,8 +14,8 @@ export const NavBar = () => {
 
       <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         <div className="flex flex-shrink-0 items-center">
-          <img className="block h-10 w-auto lg:hidden" src="/InventorySystem.png" alt="Your Company"/>
-          <img className="hidden h-10 w-auto lg:block" src="/InventorySystem.png" alt="Your Company"/>
+          <img onClick={()=>{navigate('/')}}className="block h-10 w-auto lg:hidden" src="/InventorySystem.png" alt="Inventory System"/>
+          <img onClick={()=>{navigate('/')}}className="hidden h-10 w-auto lg:block" src="/InventorySystem.png" alt="Inventory System"/>
         </div>
         <div className="hidden sm:ml-6 sm:block">
           <div className="flex space-x-4">

@@ -17,7 +17,8 @@ export const Home = () => {
 <h1 className="text-left py-3 px-3 text-lg">Sign in to Manage Your Items</h1>
 </>
 )}
-<ul>
+
+<ul className='grid grid-cols-4 justify-items-center gap-3 p-5'>
 {allItemsArray.length > 0 ? allItemsArray.map(item => {
 return <ItemCards item={item}/>
 }): <>There are no items</>}
@@ -25,3 +26,12 @@ return <ItemCards item={item}/>
 
   </>
 }
+
+
+{/* <div className='flex flex-row items-center justify-center'>
+<ul className='grid grid h-screen grid-cols-4 justify-items-center gap-3 p-5'>
+{allItemsArray.length > 0 ? allItemsArray.map(item => {
+return <ItemCards item={item}/>
+}): <>There are no items</>}
+</ul>
+</div> */}
