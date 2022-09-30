@@ -12,9 +12,9 @@ export const CreateItem = () => {
     "Signed in"
 
 ) : (
-
-    "not signed in"
-
+    <div className="">
+    <h1 className="text-center py-10 text-3xl">You need to be signed in to see this page</h1>
+</div>
 )}
   </>
 }
