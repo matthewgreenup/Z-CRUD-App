@@ -73,17 +73,17 @@ app.post('/user', (req, res) => {
 })
 
 app.post('/signin', (req, res) => {
-  let { username, password } = req.body
+  let { username, password } = req.body[0]
   getPassHash(username)
     .then(passHash => {
-      console.log('password: ', password, '|| passHash: ', passHash)
+      // console.log('password: ', password, '|| passHash: ', passHash)
       compare(password, passHash)
         .then(comparison => {
-          comparison ? res.status(200).send(true) : res.status(400).send(false)
+          comparison ? res.status(200).json(true) : res.status(400).json(false)
         })
-        .catch(err => res.status(500).send(err))
+        .catch(err => res.status(500).json(err))
     })
-    .catch(err => res.status(400).send('username is incorrect'))
+    .catch(err => res.status(400).json('username is incorrect'))
 })
 
 app.get('/useritem', (req, res) => {

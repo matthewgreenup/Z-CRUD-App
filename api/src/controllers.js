@@ -40,6 +40,7 @@ const postUser = (tempUser, passHash) => {
   return knex('users').insert(newUser)
 }
 const getPassHash = givenUsername => {
+  console.log(givenUsername, "is username")
   return knex('users')
     .where('username', givenUsername)
     .select('passHash')
