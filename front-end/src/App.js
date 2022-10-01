@@ -13,8 +13,7 @@ import { SignIn } from './components/SignIn'
 export const InventoryContext = React.createContext()
 
 function App () {
-  // const [api, setApi] = useState('http://localhost:8080')
-  const [api, setApi] = useState('http://green-machine:8080')
+  const [api, setApi] = useState('http://localhost:8080')
   const [signedIn, setSignedIn] = useState(false)
   const [allItemsArray, setAllItemsArray] = useState(false)
   const [currUser, setCurrUser] = useState({})
