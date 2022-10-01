@@ -100,7 +100,7 @@ export const SignUp = () => {
                 <input
                   type='text'
                   className=' block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
-                  placeholder='ex. John'
+                  placeholder='ex. Doe'
                   onChange={e => {
                     let temp  = e.target.value
                     if(temp !== ""){
@@ -126,7 +126,7 @@ export const SignUp = () => {
                 <input
                   type='text'
                   className=' block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
-                  placeholder='ex. John'
+                  placeholder='ex. John.Doe'
                   onChange={e => {
                     let temp  = e.target.value
                     if(temp !== ""){
@@ -152,7 +152,6 @@ export const SignUp = () => {
                 <input
                   type='password'
                   className=' block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
-                  placeholder='ex. John'
                   onChange={e => {
                     let temp  = e.target.value
                     if(temp !== ""){
