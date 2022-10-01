@@ -4,12 +4,12 @@ import { InventoryContext } from '../App'
 
 export const SignIn = () => {
   const navigate = useNavigate()
-  const { signedIn, setSignedIn, api } = useContext(InventoryContext)
+  const { signedIn, setSignedIn, api, setCurrUser, setDataChange } = useContext(InventoryContext)
   const [inputText, setInputText] = useState({})
 
-  useEffect(()=>{
-    console.log("input text object: ", inputText)
-  },[inputText])
+  //     useEffect(()=>{
+  //   console.log("input text object: ", inputText)
+  // },[inputText])
 
   const checkUser = (input) => {
     console.log("input", input)
@@ -21,9 +21,16 @@ export const SignIn = () => {
         'Content-Type': 'application/json',
       },
     })
-      .then(response => response.json())
+      .then(res => res.json())
       .then(data => {
-        console.log(data)
+        console.log("log in response: ",data)
+        setSignedIn(data);
+        fetch(`${api}/username/${input.username}`)
+        .then(res => res.json())
+        .then(userData => {
+          console.log('hopefully given user: ', userData[0])
+          setCurrUser(userData[0])
+        })
       });
   };
 
@@ -70,24 +77,27 @@ export const SignIn = () => {
                 aria-expanded='false'
                 aria-haspopup='true'
               >
-                <a className='text-gray-100 hover:bg-teal-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
+                <p className='text-gray-100 hover:bg-teal-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
                   Create Account
-                </a>
+                </p>
               </button>
 
               <button
                 onClick={() => {
                   // console.log("input text object: ", inputText)
-                  checkUser(inputText);
+                  checkUser(inputText)
+                  navigate('/myitems')
+                  setDataChange(curr => !curr)
+                  
                 }}
                 type='button'
                 className='flex rounded-md bg-orange-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-orange-500'
                 aria-expanded='false'
                 aria-haspopup='true'
               >
-                <a className='text-gray-100 hover:bg-teal-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
+                <p className='text-gray-100 hover:bg-teal-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
                   Sign In
-                </a>
+                </p>
               </button>
 
             </div>

@@ -19,6 +19,7 @@ function App () {
   const [currUser, setCurrUser] = useState({})
   const [dataChange, setDataChange] = useState(false)
   const [currItem, setCurrItem] = useState({})
+  
 
   const passContext = { signedIn, setSignedIn, api, allItemsArray, setAllItemsArray, currUser, setCurrUser,dataChange, setDataChange, currItem, setCurrItem }
 
@@ -27,10 +28,9 @@ function App () {
     fetch(url)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         setAllItemsArray(data)
       })
-  }, [])
+  }, [dataChange])
 
   return (
     <>

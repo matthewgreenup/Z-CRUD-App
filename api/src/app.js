@@ -15,7 +15,10 @@ const {
   deleteUser,
   patchItem,
   patchUser,
-  getAllUsersAndItems
+  getAllUsersAndItems,
+  getUserByUsername,
+  getItemByUserId,
+  getUserItemById 
   //   putItem,
 } = require('./controllers')
 
@@ -40,6 +43,13 @@ app.get('/user', (req, res) => {
 app.get('/user/:id', (req, res) => {
   let id = req.params.id
   getUserById(id)
+    .then(data => res.status(200).send(data))
+    .catch(err => res.status(500).send(err))
+})
+app.get('/username/:username', (req, res) => {
+  console.log(req.body)
+  let username = req.params.username
+  getUserByUsername(username)
     .then(data => res.status(200).send(data))
     .catch(err => res.status(500).send(err))
 })
@@ -73,10 +83,11 @@ app.post('/user', (req, res) => {
 })
 
 app.post('/signin', (req, res) => {
+  console.log('req body ',req.body)
   let { username, password } = req.body[0]
   getPassHash(username)
     .then(passHash => {
-      // console.log('password: ', password, '|| passHash: ', passHash)
+      console.log('password: ', password, '|| passHash: ', passHash)
       compare(password, passHash)
         .then(comparison => {
           comparison ? res.status(200).json(true) : res.status(400).json(false)
@@ -91,6 +102,12 @@ app.get('/useritem', (req, res) => {
       .then(data => res.status(200).send(data))
       .catch(err => res.status(500).send(err))
   })
+  app.get('/useritem/:id', (req, res) => {
+    let userId = req.params.id
+    getUserItemById(userId)
+      .then(data => res.status(200).send(data))
+      .catch(err => res.status(500).send(err))
+  })
 
 //ITEMS
 app.get('/item', (req, res) => {
@@ -101,6 +118,12 @@ app.get('/item', (req, res) => {
 app.get('/item/:id', (req, res) => {
   let id = req.params.id
   getItemById(id)
+    .then(data => res.status(200).send(data))
+    .catch(err => res.status(500).send(err))
+})
+app.get('/item/user/:id', (req, res) => {
+  let userId = req.params.id
+  getItemByUserId(userId)
     .then(data => res.status(200).send(data))
     .catch(err => res.status(500).send(err))
 })
@@ -123,12 +146,6 @@ app.patch('/item/:id', (req, res) => {
     .then(data => res.status(200).json(data))
     .catch(err => res.status(500).send(err))
 })
-//   app.put('/item/:id', (req, res) => {
-//     let itemId = req.params.id
-//     let item = req.body;
-//     putItem(itemId, item)
-//     .then(data => res.status(200).json(data))
-//     .catch(err => res.status(500).send(err))
-//   })
+
 
 module.exports = app

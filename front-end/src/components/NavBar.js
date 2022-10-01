@@ -5,7 +5,7 @@ import { InventoryContext } from '../App'
 
 export const NavBar = () => {
   const navigate = useNavigate()
-  const { signedIn, setSignedIn } = useContext(InventoryContext)
+  const { signedIn, setSignedIn, setDataChange} = useContext(InventoryContext)
 
   return (
     <nav className="bg-teal-600">
@@ -14,22 +14,22 @@ export const NavBar = () => {
 
       <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         <div className="flex flex-shrink-0 items-center">
-          <img onClick={()=>{navigate('/')}}className="block h-10 w-auto lg:hidden" src="/InventorySystem.png" alt="Inventory System"/>
-          <img onClick={()=>{navigate('/')}}className="hidden h-10 w-auto lg:block" src="/InventorySystem.png" alt="Inventory System"/>
+          <img onClick={()=>{navigate('/');setDataChange(curr => !curr);}}className="block h-10 w-auto lg:hidden" src="/InventorySystem.png" alt="Inventory System"/>
+          <img onClick={()=>{navigate('/');setDataChange(curr => !curr);}}className="hidden h-10 w-auto lg:block" src="/InventorySystem.png" alt="Inventory System"/>
         </div>
         <div className="hidden sm:ml-6 sm:block">
           <div className="flex space-x-4">
 
-          <button onClick={()=>{navigate('/')}} type="button" className="flex rounded-md bg-teal-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-orange-500"aria-expanded="false" aria-haspopup="true">
-            <a className="text-gray-100 hover:bg-orange-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+          <button onClick={()=>{navigate('/');setDataChange(curr => !curr);}} type="button" className="flex rounded-md bg-teal-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-orange-500"aria-expanded="false" aria-haspopup="true">
+            <p className="text-gray-100 hover:bg-orange-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</p>
             </button>
 
-            <button onClick={()=>{navigate('/myitems')}} type="button" className="flex rounded-md bg-teal-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-orange-500"aria-expanded="false" aria-haspopup="true">
-            <a className="text-gray-100 hover:bg-orange-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">My Items</a>
+            <button onClick={()=>{navigate('/myitems');setDataChange(curr => !curr);}} type="button" className="flex rounded-md bg-teal-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-orange-500"aria-expanded="false" aria-haspopup="true">
+            <p className="text-gray-100 hover:bg-orange-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">My Items</p>
             </button>
 
-            <button onClick={()=>{navigate('/createitem')}} type="button" className="flex rounded-md bg-teal-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-orange-500"aria-expanded="false" aria-haspopup="true">
-            <a className="text-gray-100 hover:bg-orange-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Add Items</a>
+            <button onClick={()=>{navigate('/createitem');setDataChange(curr => !curr);}} type="button" className="flex rounded-md bg-teal-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-orange-500"aria-expanded="false" aria-haspopup="true">
+            <p className="text-gray-100 hover:bg-orange-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Add Items</p>
             </button>
 
           </div>
@@ -40,12 +40,12 @@ export const NavBar = () => {
           <div>
 
             {signedIn ? (
-            <button onClick={()=>{navigate('/'); window.location.reload()}} type="button" className="flex rounded-md bg-teal-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-orange-500" aria-expanded="false" aria-haspopup="true">
-            <a className="text-gray-100 hover:bg-orange-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log Off</a>
+            <button onClick={()=>{navigate('/'); window.location.reload();setDataChange(curr => !curr);}} type="button" className="flex rounded-md bg-teal-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-orange-500" aria-expanded="false" aria-haspopup="true">
+            <p className="text-gray-100 hover:bg-orange-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log Off</p>
             </button>
             ):(
-            <button onClick={()=>{navigate('/signin')}} type="button" className="flex rounded-md bg-teal-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-orange-500" aria-expanded="false" aria-haspopup="true">
-            <a className="text-gray-100 hover:bg-orange-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign In</a>
+            <button onClick={()=>{navigate('/signin');setDataChange(curr => !curr);}} type="button" className="flex rounded-md bg-teal-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-orange-500" aria-expanded="false" aria-haspopup="true">
+            <p className="text-gray-100 hover:bg-orange-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign In</p>
             </button>
             )}
 

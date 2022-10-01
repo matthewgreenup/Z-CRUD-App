@@ -8,26 +8,34 @@ const getAllUsers = () => {
   return knex('users')
 }
 const getUserById = id => {
-  return knex('users').where('id', id)
+  return knex('users').where('user_id', id)
+}
+const getUserByUsername = username => {
+  return knex('users').where('username', username)
 }
 const deleteUser = id => {
   return knex('users')
-    .where('id', id)
+    .where('user_id', id)
     .del()
     .then(data => data)
 }
 const patchUser = (userId, user) => {
   console.log('userid: ', userId, 'user: ', user)
   return knex('users')
-    .where('id', userId)
+    .where('user_id', userId)
     .update(user)
     .then(data => data)
 }
 const getAllUsersAndItems = () => {
 return knex('items')
-.join('users', 'user_id', '=', 'users.id')
+.join('users', 'items.user_id', '=', 'users.user_id')
 
 }
+const getUserItemById = (userId) => {
+  return knex('items')
+  .join('users', 'items.user_id', '=', 'users.user_id')
+  .where("items.user_id", userId)
+  }
 
 const postUser = (tempUser, passHash) => {
   const newUser = {
@@ -52,37 +60,26 @@ const getAllItems = () => {
   return knex('items')
 }
 const getItemById = id => {
-  return knex('items').where('id', id)
+  return knex('items').where('item_id', id)
+}
+const getItemByUserId = userId => {
+  return knex('items').where('user_id', id)
 }
 const postItem = item => {
   return knex('items').insert(item)
 }
 const deleteItem = id => {
   return knex('items')
-    .where('id', id)
+    .where('item_id', id)
     .del()
     .then(data => data)
 }
 const patchItem = (itemId, item) => {
   return knex('items')
-    .where('id', itemId)
+    .where('item_id', itemId)
     .update(item)
     .then(data => data)
 }
-//   const putItem = (itemId, item) => {
-//     console.log('this is item: ', item)
-//     return knex('items').where('id',itemId).update({
-//             // user_id: item.user_id || null,
-//             // item_name: item.item_name || null,
-//             // description: item.description || null,
-//             // quantity: item.quantity ||null,
-
-//             user_id: item.user_id,
-//             item_name: item.item_name,
-//             description: item.description,
-//             quantity: item.quantity,
-//     }).returning('*').then(data=>data);
-//   }
 
 module.exports = {
   getAllUsers,
@@ -96,6 +93,8 @@ module.exports = {
   deleteUser,
   patchItem,
   patchUser,
-  getAllUsersAndItems
-  //   putItem,
+  getAllUsersAndItems,
+  getUserByUsername,
+  getItemByUserId,
+  getUserItemById,
 }
