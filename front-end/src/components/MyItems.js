@@ -9,12 +9,14 @@ export const MyItems = () => {
   const [myItemsArray, setMyItemsArray] = useState([])
 
   useEffect(() => {
-    const url = `${api}/useritem/${currUser.user_id}`
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        setMyItemsArray(data)
-      })
+    if(currUser !== undefined){
+      const url = `${api}/useritem/${currUser.user_id}`
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          setMyItemsArray(data)
+        })
+    }
   }, [dataChange, currUser])
 
   useEffect(() => {
@@ -33,7 +35,7 @@ export const MyItems = () => {
 <ul className='grid grid-cols-4 justify-items-center gap-3 p-5'>
 {myItemsArray.length > 0 && Array.isArray(myItemsArray) ? myItemsArray.map(item => {
 return <ItemCards item={item}/>
-}): <>There are no items</>}
+}): <>You have no items, yet.</>}
 
 </ul>
 

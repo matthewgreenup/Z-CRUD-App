@@ -13,15 +13,46 @@ import { SignIn } from './components/SignIn'
 export const InventoryContext = React.createContext()
 
 function App () {
-  const [api, setApi] = useState('http://localhost:8080')
+  // const [api, setApi] = useState('http://localhost:8080')
+  const [api, setApi] = useState('http://green-machine:8080')
   const [signedIn, setSignedIn] = useState(false)
   const [allItemsArray, setAllItemsArray] = useState(false)
   const [currUser, setCurrUser] = useState({})
   const [dataChange, setDataChange] = useState(false)
   const [currItem, setCurrItem] = useState({})
   
+  const checkUser = (input) => {
+    console.log("input", input)
+    const url = `${api}/signin`;
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify([input]),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("log in response: ",data)
+        if(data === true){
+          
+          fetch(`${api}/username/${input.username}`)
+          .then(res => res.json())
+          .then(userData => {
+            console.log('hopefully given user: ', userData[0])
+            setCurrUser(userData[0])
+            setSignedIn(data);
+  
+          })
+        }
+        else(alert('Wrong Username or Password'))
+      });
+  };
 
-  const passContext = { signedIn, setSignedIn, api, allItemsArray, setAllItemsArray, currUser, setCurrUser,dataChange, setDataChange, currItem, setCurrItem }
+
+
+
+  const passContext = { signedIn, setSignedIn, api, allItemsArray, setAllItemsArray, currUser, setCurrUser,dataChange, setDataChange, currItem, setCurrItem, checkUser }
 
   useEffect(() => {
     const url = `${api}/useritem`

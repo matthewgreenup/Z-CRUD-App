@@ -11,7 +11,8 @@ const getUserById = id => {
   return knex('users').where('user_id', id)
 }
 const getUserByUsername = username => {
-  return knex('users').where('username', username)
+  username = username.toLowerCase();
+  return knex('users').whereILike('username', username)
 }
 const deleteUser = id => {
   return knex('users')
@@ -49,8 +50,9 @@ const postUser = (tempUser, passHash) => {
 }
 const getPassHash = givenUsername => {
   console.log(givenUsername, "is username")
+  givenUsername = givenUsername.toLowerCase();
   return knex('users')
-    .where('username', givenUsername)
+    .whereILike('username', givenUsername)
     .select('passHash')
     .then(data => data[0].passHash)
 }

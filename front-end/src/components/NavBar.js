@@ -7,7 +7,10 @@ export const NavBar = () => {
   const navigate = useNavigate()
   const { signedIn, setSignedIn, setDataChange} = useContext(InventoryContext)
 
-  return (
+  return (<>
+
+    {signedIn}
+
     <nav className="bg-teal-600">
   <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div className="relative flex h-16 items-center justify-between">
@@ -58,5 +61,5 @@ export const NavBar = () => {
 
 </nav>
 
-  )
+  </>)
 }

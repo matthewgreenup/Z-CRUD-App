@@ -69,7 +69,8 @@ app.patch('/user/:id', (req, res) => {
 })
 
 app.post('/user', (req, res) => {
-  const tempUser = req.body
+  const tempUser = req.body[0]
+
 
   hash(tempUser.password, salt)
     .then(passHash => {
@@ -92,9 +93,9 @@ app.post('/signin', (req, res) => {
         .then(comparison => {
           comparison ? res.status(200).json(true) : res.status(400).json(false)
         })
-        .catch(err => res.status(500).json(err))
+        .catch(err => res.status(500).json(false))
     })
-    .catch(err => res.status(400).json('username is incorrect'))
+    .catch(err => res.status(400).json(false))
 })
 
 app.get('/useritem', (req, res) => {
@@ -141,7 +142,8 @@ app.delete('/item/:id', (req, res) => {
 })
 app.patch('/item/:id', (req, res) => {
   let itemId = req.params.id
-  let item = req.body
+  let item = req.body[0]
+  console.log("item id: ", itemId, "item: ", req.body)
   patchItem(itemId, item)
     .then(data => res.status(200).json(data))
     .catch(err => res.status(500).send(err))

@@ -5,11 +5,11 @@
  exports.up = function(knex) {
     return knex.schema.createTable('items', table => {
         table.increments('item_id');
-        table.integer('user_id')
+        table.integer('user_id').notNullable
         table.foreign('user_id').references('user_id').inTable('users')
         table.string('item_name',).notNullable();
         table.string('description', 2048)
-        table.integer('quantity');
+        table.integer('quantity').notNullable;
       });
 };
 
