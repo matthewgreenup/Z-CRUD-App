@@ -14,11 +14,11 @@ quantity: false
   })
 
   useEffect(() => {
-    console.log("item object, ", itemObject)
+    // console.log("item object, ", itemObject)
      }, [itemObject])
 
      const postItem = input => {
-      console.log("input", input)
+      // console.log("input", input)
     const url = `${api}/item`;
       if(input.item_name !== false && input.description !== false && input.quantity != false){
         fetch(url, {
@@ -30,7 +30,7 @@ quantity: false
         })
           .then(res => res.json())
           .then(data => {
-    console.log(data);
+    // console.log(data);
     setDataChange(curr => !curr);
     navigate('/myitems');
           })

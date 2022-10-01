@@ -22,7 +22,7 @@ function App () {
   const [currItem, setCurrItem] = useState({})
   
   const checkUser = (input) => {
-    console.log("input", input)
+    // ("input", input)
     const url = `${api}/signin`;
     fetch(url, {
       method: 'POST',
@@ -33,13 +33,13 @@ function App () {
     })
       .then(res => res.json())
       .then(data => {
-        console.log("log in response: ",data)
+        // console.log("log in response: ",data)
         if(data === true){
           
           fetch(`${api}/username/${input.username}`)
           .then(res => res.json())
           .then(userData => {
-            console.log('hopefully given user: ', userData[0])
+            // console.log('hopefully given user: ', userData[0])
             setCurrUser(userData[0])
             setSignedIn(data);
   

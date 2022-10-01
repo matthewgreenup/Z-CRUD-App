@@ -9,11 +9,11 @@ export const ItemDetails = () => {
   const [itemObject, setItemObject] = useState({})
 
       useEffect(() => {
-        console.log("item object, ", itemObject, currItem.item_id)
+        // console.log("item object, ", itemObject, currItem.item_id)
          }, [itemObject])
 
       const patchItem = input => {
-        console.log("input", input)
+        // console.log("input", input)
       const url = `${api}/item/${currItem.item_id}`;
         if(input.item_name !== "" && input.description !== "" && input.quantity != false){
           fetch(url, {
@@ -25,7 +25,7 @@ export const ItemDetails = () => {
           })
             .then(res => res.json())
             .then(data => {
-      console.log('end of fetch ', data);
+      // console.log('end of fetch ', data);
       setDataChange(curr => !curr);
       navigate('/myitems');
             })
@@ -36,7 +36,7 @@ export const ItemDetails = () => {
        }
 
        const deleteItem = itemId => {
-        console.log("item id", itemId)
+        // console.log("item id", itemId)
         const url = `${api}/item/${itemId}`;
         fetch(url, {
           method: 'DELETE',
@@ -47,7 +47,7 @@ export const ItemDetails = () => {
         })
           .then(res => res.json())
           .then(data => {
-            console.log('end of fetch ', data);
+            // console.log('end of fetch ', data);
             setDataChange(curr => !curr);
             navigate('/myitems');
                   })

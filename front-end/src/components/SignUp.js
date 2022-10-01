@@ -13,13 +13,13 @@ export const SignUp = () => {
       })
 
       useEffect(() => {
-        console.log("userObject ", userObject)
+        // console.log("userObject ", userObject)
          }, [userObject])
 
 
 
          const postUser = input => {
-          console.log("input", input)
+          // console.log("input", input)
         const url = `${api}/user`;
           if(input.firstName !== false && input.last_name !== false && input.username !== false && input.password !== false){
             fetch(url, {
@@ -31,7 +31,7 @@ export const SignUp = () => {
             })
               .then(res => res.json())
               .then(data => {
-                console.log("post user data, ",data);
+                // console.log("post user data, ",data);
                 if(data.name !== 'error'){
                   setDataChange(curr => !curr);
                   navigate('/myitems');

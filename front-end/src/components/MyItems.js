@@ -20,11 +20,11 @@ export const MyItems = () => {
   }, [dataChange, currUser])
 
   useEffect(() => {
- console.log("this is my items array, ", myItemsArray)
+//  console.log("this is my items array, ", myItemsArray)
   }, [myItemsArray])
 
   useEffect(() => {
-    console.log("this is curr user, ", currUser)
+    // console.log("this is curr user, ", currUser)
      }, [currUser])
 
 

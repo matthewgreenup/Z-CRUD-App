@@ -47,7 +47,7 @@ app.get('/user/:id', (req, res) => {
     .catch(err => res.status(500).send(err))
 })
 app.get('/username/:username', (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   let username = req.params.username
   getUserByUsername(username)
     .then(data => res.status(200).send(data))
@@ -84,11 +84,11 @@ app.post('/user', (req, res) => {
 })
 
 app.post('/signin', (req, res) => {
-  console.log('req body ',req.body)
+  // console.log('req body ',req.body)
   let { username, password } = req.body[0]
   getPassHash(username)
     .then(passHash => {
-      console.log('password: ', password, '|| passHash: ', passHash)
+      // console.log('password: ', password, '|| passHash: ', passHash)
       compare(password, passHash)
         .then(comparison => {
           comparison ? res.status(200).json(true) : res.status(400).json(false)
@@ -143,7 +143,7 @@ app.delete('/item/:id', (req, res) => {
 app.patch('/item/:id', (req, res) => {
   let itemId = req.params.id
   let item = req.body[0]
-  console.log("item id: ", itemId, "item: ", req.body)
+  // console.log("item id: ", itemId, "item: ", req.body)
   patchItem(itemId, item)
     .then(data => res.status(200).json(data))
     .catch(err => res.status(500).send(err))

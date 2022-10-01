@@ -21,7 +21,7 @@ const deleteUser = id => {
     .then(data => data)
 }
 const patchUser = (userId, user) => {
-  console.log('userid: ', userId, 'user: ', user)
+  //console.log('userid: ', userId, 'user: ', user)
   return knex('users')
     .where('user_id', userId)
     .update(user)
@@ -49,7 +49,7 @@ const postUser = (tempUser, passHash) => {
   return knex('users').insert(newUser)
 }
 const getPassHash = givenUsername => {
-  console.log(givenUsername, "is username")
+  //console.log(givenUsername, "is username")
   givenUsername = givenUsername.toLowerCase();
   return knex('users')
     .whereILike('username', givenUsername)
