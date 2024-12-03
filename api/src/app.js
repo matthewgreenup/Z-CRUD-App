@@ -31,7 +31,7 @@ const salt = 10
 const { hash, compare } = bcrypt
 
 app.get('/', (req, res) => {
-  res.status(200).send("you're home")
+  res.status(200).send('Common endpoints are: /user , /user/:id , /item , /item/:id , /useritem , /useritem/:userId')
 })
 
 //USERS
