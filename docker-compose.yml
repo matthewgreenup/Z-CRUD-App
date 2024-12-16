@@ -1,0 +1,70 @@
+version: '3'
+
+volumes:
+  pgdatasource:
+
+
+services:
+  fermi-db:
+    image: postgres
+    restart: always
+    environment:
+      - DATABASE_HOST=127.0.0.1
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=fermi
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: [ 'CMD-SHELL', 'pg_isready -U postgres' ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - pgdatasource:/var/lib/postgresql/data
+
+  fermi-api:
+    build: api/
+    depends_on:
+      fermi-db:
+        condition: service_healthy
+    ports:
+      - '8080:8080'
+    environment:
+      - NODE_ENV=development
+      - DATABASE_HOST=fermi-db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=fermi
+    volumes:
+      - type: bind
+        source: ./api/src
+        target: /app/src
+    command: npm run start
+    restart: on-failure
+    healthcheck:
+      test: curl --fail http://localhost:8080 || exit 1
+      interval: 5s
+      timeout: 5s
+      start_period: 120s
+      retries: 10
+
+  fermi-ui:
+    build: ui/
+    depends_on:
+      - 'fermi-api'
+    ports:
+      - '3001:3000'
+    volumes:
+      - type: bind
+        source: ./ui/src
+        target: /app/src
+    restart: on-failure
+    healthcheck:
+      test: curl --fail http://localhost:3000 || exit 1
+      interval: 5s
+      timeout: 5s
+      start_period: 120s
+      retries: 10
